@@ -19,11 +19,13 @@
 	const texture = $derived(
 		(context.stateApp.loadedAssets?.[key] || PIXI.Texture.EMPTY) as LoadedSprite,
 	);
-</script>
 
-{#if texture === PIXI.Texture.EMPTY || debug}
-	{console.error(`Sprite: key "${key}" is not found in the loadedAssets`)}
-	{console.log('loadedAssets', $state.snapshot(context.stateApp).loadedAssets)}
-{/if}
+	// Always render BaseSprite; BaseSprite now safely falls back to PIXI.Texture.EMPTY.
+	</script>
 
-<BaseSprite {...baseSpriteProps} {texture} />
+	<BaseSprite {...baseSpriteProps} {texture} />
+
+	{#if texture === PIXI.Texture.EMPTY || debug}
+	    {console.error(`Sprite: key "${key}" is not found in the loadedAssets`)}
+	    {console.log('loadedAssets', $state.snapshot(context.stateApp).loadedAssets)}
+	{/if}

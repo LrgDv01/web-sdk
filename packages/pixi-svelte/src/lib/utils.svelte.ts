@@ -97,8 +97,19 @@ export function propsSyncEffect<TProps extends object, TTarget>({
 				.filter((key) => (ignore ? !ignore.includes(key) : true))
 				.forEach((key) => {
 					if (props[key] !== undefined) {
-						// @ts-ignore
-						targetInstance[key] = props[key];
+						// Defensive assignment: some targets (PIXI objects) have setters that
+						// will throw if given unexpected values (or if an internal sub-property
+						// is undefined). Wrap in try/catch to avoid breaking the whole $effect.
+						try {
+							// Skip assigning functions (event handlers) directly to target.
+							const value = props[key];
+							if (typeof value === 'function') return;
+							// @ts-ignore
+							targetInstance[key] = value;
+						} catch (err) {
+							// Log a debug warning (don't throw) so rendering continues.
+							console.warn('propsSyncEffect: failed to assign prop', String(key), err);
+						}
 					}
 				});
 		}

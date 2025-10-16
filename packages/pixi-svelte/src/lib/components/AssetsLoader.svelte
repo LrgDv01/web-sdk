@@ -88,6 +88,7 @@
 						};
 				}
 				context.stateApp.loaded = true;
+				console.log('All assets loaded:', context.stateApp.loadedAssets);  // Added > Debug: See loaded keys
 			})();
 		}
 	});
