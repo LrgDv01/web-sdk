@@ -18,14 +18,27 @@
 	const POSITION_ADJUSTMENT = 1.0;  // Changed: No need for 1.01 offset
 
 	// Removed unused import—loading is handled by AssetsLoader
+	// Add this derived for safety (checks if asset is loaded)
+  let isLoaded = $derived(context.stateApp.loadedAssets['reels_frame'] !== undefined);
 </script>
 
 <!-- Single Sprite for your combined image -->
-<Sprite
+<!-- <Sprite
 	key="reels_frame"  
 	anchor={0.5}  
 	x={context.stateGameDerived.boardLayout().x * POSITION_ADJUSTMENT}
 	y={context.stateGameDerived.boardLayout().y * POSITION_ADJUSTMENT}
 	width={context.stateGameDerived.boardLayout().width * SPRITE_SCALE.width}
 	height={context.stateGameDerived.boardLayout().height * SPRITE_SCALE.height}
-/>
+/> -->
+
+{#if isLoaded}
+  <Sprite
+    key="reels_frame"
+    anchor={0.5}
+    x={context.stateGameDerived.boardLayout().x * POSITION_ADJUSTMENT}
+    y={context.stateGameDerived.boardLayout().y * POSITION_ADJUSTMENT}
+    width={context.stateGameDerived.boardLayout().width * SPRITE_SCALE.width}
+    height={context.stateGameDerived.boardLayout().height * SPRITE_SCALE.height}
+  />
+{/if}

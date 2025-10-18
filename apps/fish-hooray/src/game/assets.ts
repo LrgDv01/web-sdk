@@ -117,14 +117,14 @@ export default {
 			scale: 2,
 		},
 	},
-	// reelsFrame: {
-	// 	type: 'sprites',
-	// 	src: new URL('../../assets/sprites/reelsFrame/reels_frame.json', import.meta.url).href,
-	// },
-	payFrame: {
-		type: 'sprite',
-		src: new URL('../../assets/sprites/payFrame/payFrame.png', import.meta.url).href,
+	reelsFrame: {
+		type: 'sprites',
+		src: new URL('../../assets/sprites/reelsFrame/reels_frame.json', import.meta.url).href,
 	},
+	// payFrame: {
+	// 	type: 'sprite',
+	// 	src: new URL('../../assets/sprites/payFrame/payFrame.png', import.meta.url).href,
+	// },
 	anticipation: {
 		type: 'spine',
 		src: {
@@ -242,13 +242,13 @@ export default {
 	// 		scale: 2,
 	// 	},
 	// },
-	// Add new static PNG entry
-  'reels_frame': {
-    type: 'texture',  // Tells AssetsLoader to load as PIXI.Texture (non-spine)
-    src: '../../assets/sprites/reelsFrame/reels_frame.png',  // Absolute path from static/ (Vite serves from root)
-    preload: true  // Load early for quick rendering
-  },
 
+	// Replace your 'reels_frame' with this
+	'reels_frame': {
+		type: 'image',  // Use 'image' for single PNG—processed as PIXI.Texture (avoids "no process method" error)
+		src: new URL('../../assets/sprites/reelsFrame/reels_frame.png', import.meta.url).href,  // Absolute URL for Vite/Pixi loading
+		preload: true  // Load early
+	},
 
 	progressBar: {
 		type: 'sprites',
