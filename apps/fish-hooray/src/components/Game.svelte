@@ -30,32 +30,20 @@
 
   const context = getContext();
 
-  onMount(() => (context.stateLayout.showLoadingScreen = true));
+  // Combined onMount: Run all setup here
+  onMount(() => {
+    context.stateLayout.showLoadingScreen = true;
 
-  context.eventEmitter.subscribeOnMount({
-    buyBonusConfirm: () => {
-      stateModal.modal = { name: 'buyBonusConfirm' };
-    },
-    
+    context.eventEmitter.subscribeOnMount({
+      buyBonusConfirm: () => {
+        stateModal.modal = { name: 'buyBonusConfirm' };
+      },
+    });
+
+    // No asset overrides needed here—handled in assets.ts
   });
 
-// ADDED
-  // // Add or override assets here (run once on mount)
-  // onMount(() => {
-  //   // Remove the old Spine asset to stop .json loading error
-  //   if (context.stateApp.assets['reelhouse']) {
-  //     delete context.stateApp.assets['reelhouse'];  // 'reelhouse' is the key for the glowing frame animation
-  //   }
-
-  //   // Add your new static PNG
-  //   context.stateApp.assets['reels_frame'] = {
-  //     type: 'image',  // Or 'texture'/'sprite'—check getProcessed in assetLoad.ts for supported types
-  //     src: '/assets/sprites/reelsFrame/reels_frame.png',  // Absolute path for dev/server
-  //     preload: true  // Load early (optional, but good for frames)
-  //   };
-  // });
- // ADDED END
-
+  console.log(context.stateApp.loadedAssets)
 </script>
 
 <App>

@@ -117,10 +117,10 @@ export default {
 			scale: 2,
 		},
 	},
-	reelsFrame: {
-		type: 'sprites',
-		src: new URL('../../assets/sprites/reelsFrame/reels_frame.json', import.meta.url).href,
-	},
+	// reelsFrame: {
+	// 	type: 'sprites',
+	// 	src: new URL('../../assets/sprites/reelsFrame/reels_frame.json', import.meta.url).href,
+	// },
 	payFrame: {
 		type: 'sprite',
 		src: new URL('../../assets/sprites/payFrame/payFrame.png', import.meta.url).href,
@@ -234,14 +234,22 @@ export default {
 			scale: 2,
 		},
 	},
-	reelhouse: {
-		type: 'spine',
-		src: {
-			atlas: new URL('../../assets/spines/reelhouse/reelhouse_glow.atlas', import.meta.url).href,
-			skeleton: new URL('../../assets/spines/reelhouse/reelhouse_glow.json', import.meta.url).href,
-			scale: 2,
-		},
-	},
+	// reelhouse: {
+	// 	type: 'spine',
+	// 	src: {
+	// 		atlas: new URL('../../assets/spines/reelhouse/reelhouse_glow.atlas', import.meta.url).href,
+	// 		skeleton: new URL('../../assets/spines/reelhouse/reelhouse_glow.json', import.meta.url).href,
+	// 		scale: 2,
+	// 	},
+	// },
+	// Add new static PNG entry
+  'reels_frame': {
+    type: 'texture',  // Tells AssetsLoader to load as PIXI.Texture (non-spine)
+    src: '../../assets/sprites/reelsFrame/reels_frame.png',  // Absolute path from static/ (Vite serves from root)
+    preload: true  // Load early for quick rendering
+  },
+
+
 	progressBar: {
 		type: 'sprites',
 		src: new URL('../../assets/sprites/progressBar/progressBar.json', import.meta.url).href,
