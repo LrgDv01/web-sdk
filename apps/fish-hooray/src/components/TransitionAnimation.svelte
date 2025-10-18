@@ -10,7 +10,7 @@
 	const context = getContext();
 </script>
 
-<SpineProvider
+<!-- <SpineProvider
 	key="transition"
 	x={context.stateLayoutDerived.canvasSizes().width * 0.5}
 	y={context.stateLayoutDerived.canvasSizes().height * 0.5}
@@ -23,4 +23,4 @@
 			complete: props.oncomplete,
 		}}
 	/>
-</SpineProvider>
+</SpineProvider> -->

@@ -3,7 +3,7 @@
   import { onMount, tick } from 'svelte';  // For lifecycle and async updates
 
   import { EnablePixiExtension } from 'components-pixi';
-  import { Button, EnableHotkey } from 'components-shared';
+  import { EnableHotkey } from 'components-shared';
   import { MainContainer } from 'components-layout';
   import { App, REM } from 'pixi-svelte';
   import { stateModal } from 'state-shared';
@@ -30,7 +30,6 @@
 
   const context = getContext();
 
-  // Combined onMount: Run all setup here
   onMount(() => {
     context.stateLayout.showLoadingScreen = true;
 
@@ -39,11 +38,7 @@
         stateModal.modal = { name: 'buyBonusConfirm' };
       },
     });
-
-    // No asset overrides needed here—handled in assets.ts
   });
-
-  console.log(context.stateApp.loadedAssets)
 </script>
 
 <App>
@@ -80,7 +75,7 @@
           style={{
             fontFamily: "Pacifico, 'Fredoka One', sans-serif",
             fontSize: REM * 1.5,
-            fontWeight: '700',
+            fontWeight: '600',
             lineHeight: REM * 2,
             fill: 0xffffff,
             stroke: { thickness: 2, color: 0x003366 },
@@ -88,9 +83,7 @@
           }}
         />
       {/snippet}
-      <!-- {#snippet bottomBar()}
-          <Button name="POGI"/>
-      {/snippet} -->
+     
     </UI>
     <Win />
     <FreeSpinIntro />

@@ -15,18 +15,20 @@
 	const context = getContext();
 
 	let loadingType = $state<'start' | 'transition'>('start');
+	console.log("✅ Loaded assets keys:", Object.keys(context.stateApp.loadedAssets || {}));
+
 </script>
 
 <!-- logo and loading progress -->
 <FadeContainer show={loadingType === 'start'}>
 	<MainContainer>
-		<Container
+		 <Container
 			x={context.stateLayoutDerived.mainLayout().width * 0.5}
 			y={context.stateLayoutDerived.mainLayout().height * 0.5}
 		>
-			<SpineProvider key="loader" width={300}>
+			<Sprite key="loader" x={0} y={0}>
 				<SpineTrack trackIndex={0} animationName={'title_screen'} loop timeScale={3} />
-			</SpineProvider>
+			</Sprite>
 			{#if !context.stateApp.loaded}
 				<LoadingProgress y={250} width={1967 * 0.2} height={346 * 0.2}>
 					{#snippet background(sizes)}

@@ -14,8 +14,15 @@
 
 	// Adjust scales to fit your new image (test by running and resizing window)
 	// Your AI image might need different values—start with 1.0 and tweak
-	const SPRITE_SCALE = { width: 1.0, height: 1.0 };  // Changed: Simpler for static PNG
-	const POSITION_ADJUSTMENT = 1.0;  // Changed: No need for 1.01 offset
+
+	const SPRITE_SCALE = { width: 1.8, height: 1.7 };  // Changed: Simpler for static PNG
+	const POSITION_ADJUSTMENT_X = 1.0;  // Changed: No need for 1.01 offset
+	const POSITION_ADJUSTMENT_Y = 0.94;
+
+	// Position for other BoaardFrame elements
+	// const SPRITE_SCALE = { width: 1.9, height: 2.2 };  // Changed: Simpler for static PNG
+	// const POSITION_ADJUSTMENT_X = 1.0;  // Changed: No need for 1.01 offset
+	// const POSITION_ADJUSTMENT_Y = 0.94; 
 
 	// Removed unused import—loading is handled by AssetsLoader
 	// Add this derived for safety (checks if asset is loaded)
@@ -36,8 +43,8 @@
   <Sprite
     key="reels_frame"
     anchor={0.5}
-    x={context.stateGameDerived.boardLayout().x * POSITION_ADJUSTMENT}
-    y={context.stateGameDerived.boardLayout().y * POSITION_ADJUSTMENT}
+    x={context.stateGameDerived.boardLayout().x * POSITION_ADJUSTMENT_X}
+    y={context.stateGameDerived.boardLayout().y * POSITION_ADJUSTMENT_Y}
     width={context.stateGameDerived.boardLayout().width * SPRITE_SCALE.width}
     height={context.stateGameDerived.boardLayout().height * SPRITE_SCALE.height}
   />

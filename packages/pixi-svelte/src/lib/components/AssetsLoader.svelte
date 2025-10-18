@@ -92,6 +92,8 @@
 			})();
 		}
 	});
+	console.log("✅ Loaded assets keys:", Object.keys(context.stateApp.loadedAssets || {}));
+
 </script>
 
 {#if preLoaded}

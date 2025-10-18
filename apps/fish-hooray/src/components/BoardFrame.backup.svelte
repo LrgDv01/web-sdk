@@ -1,5 +1,5 @@
 <script lang="ts" module>
-	import frame_bg from '../../static/assets/sprites/reelsFrame/reels_frame.png';		
+	// import frame_bg from '../../static/assets/sprites/reelsFrame/reels_frame.png';		
 
 	export type EmitterEventBoardFrame =
 		| { type: 'boardFrameGlowShow' }
@@ -32,8 +32,8 @@
 	});
 </script>
 
-{#if animationName}
-	<!-- <SpineProvider
+<!-- {#if animationName}
+	<SpineProvider
 		zIndex={-1}
 		key="reelhouse"
 		x={context.stateGameDerived.boardLayout().x * POSITION_ADJUSTMENT}
@@ -61,8 +61,8 @@
 				},
 			}}
 		/>
-	</SpineProvider> -->
-{/if}
+	</SpineProvider>
+{/if} -->
 
 <Sprite
 	key="frame_bg.png"
@@ -72,7 +72,7 @@
 	width={context.stateGameDerived.boardLayout().width * SPRITE_SCALE.width}
 	height={context.stateGameDerived.boardLayout().width * SPRITE_SCALE.height}
 />
-<!-- 
+
 <Sprite
 	key="frame_edge.png"
 	anchor={0.5}
@@ -80,4 +80,4 @@
 	y={context.stateGameDerived.boardLayout().y * POSITION_ADJUSTMENT}
 	width={context.stateGameDerived.boardLayout().width * SPRITE_SCALE.width}
 	height={context.stateGameDerived.boardLayout().width * SPRITE_SCALE.height}
-/> -->
+/>

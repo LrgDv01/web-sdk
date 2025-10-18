@@ -43,7 +43,7 @@
 		y={context.stateGameDerived.boardLayout().y}
 		pivot={anchorToPivot({ anchor: 0.5, sizes: BACKGROUND_SIZES })}
 	>
-		<SpineProvider
+		<!-- <SpineProvider
 			key="fsIntro"
 			width={PANEL_SIZES.width}
 			x={PANEL_SIZES.width * 0.5}
@@ -60,6 +60,6 @@
 			<SpineSlot slotName="slot_text_placeholder">
 				{@render props.children({ sizes: BACKGROUND_SIZES })}
 			</SpineSlot>
-		</SpineProvider>
+		</SpineProvider> -->
 	</Container>
 </MainContainer>

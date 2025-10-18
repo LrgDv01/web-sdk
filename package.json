@@ -35,9 +35,5 @@
   "devDependencies": {
     "cross-env": "^10.1.0",
     "turbo": "2.4.4"
-  },
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+  }
 }

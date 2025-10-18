@@ -15,17 +15,17 @@
 	import type { LoadedSprite } from '../types';
 
 	const { debug, key, ...baseSpriteProps }: Props = $props();
-	const context = getContextApp();AssetsLoader.svelte
+	const context = getContextApp();
 	const texture = $derived(
 		(context.stateApp.loadedAssets?.[key] || PIXI.Texture.EMPTY) as LoadedSprite,
 	);
+</script>
 
-	// Always render BaseSprite; BaseSprite now safely falls back to PIXI.Texture.EMPTY.
-	</script>
+{#if texture === PIXI.Texture.EMPTY || debug}
+	{console.error(`Sprite: key "${key}" is not found in the loadedAssets`)}
+	{console.log('loadedAssets', $state.snapshot(context.stateApp).loadedAssets)}
+{/if}
 
-	<BaseSprite {...baseSpriteProps} {texture} />
+<BaseSprite {...baseSpriteProps} {texture} />
 
-	{#if texture === PIXI.Texture.EMPTY || debug}
-	    {console.error(`Sprite: key "${key}" is not found in the loadedAssets`)}
-	    {console.log('loadedAssets', $state.snapshot(context.stateApp).loadedAssets)}
-	{/if}
+
