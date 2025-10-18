@@ -207,6 +207,17 @@ export default {
 		},
 		preload: true,
 	},
+	// Static sprite fallbacks for projects that prefer PNG/WebP backgrounds instead of Spine
+	backgroundImage: {
+		type: 'sprite',
+		src: new URL('../../assets/sprites/backgroundImage/background_image.webp', import.meta.url).href,
+		preload: true,
+	},
+	backgroundFeatureImage: {
+		type: 'sprite',
+		src: new URL('../../assets/sprites/backgroundImage/background_image.png', import.meta.url).href,
+		preload: true,
+	},
 	tumble_multiplier: {
 		type: 'spine',
 		src: {

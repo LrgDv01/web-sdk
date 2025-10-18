@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { SpineProvider, SpineTrack } from 'pixi-svelte';
-	import { stateBetDerived } from 'state-shared';
+	// import { SpineProvider, SpineTrack } from 'pixi-svelte';
+	// import { stateBetDerived } from 'state-shared';
 
 	import { getContext } from '../game/context';
 	import type { Reel } from '../game/stateGame.svelte';
@@ -24,7 +24,7 @@
 		}
 	});
 </script>
-
+<!-- 
 <SpineProvider
 	key="anticipation"
 	width={SYMBOL_SIZE * 0.56}
@@ -51,4 +51,4 @@
 			},
 		}}
 	/>
-</SpineProvider>
+</SpineProvider> -->

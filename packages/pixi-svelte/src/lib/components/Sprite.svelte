@@ -15,7 +15,7 @@
 	import type { LoadedSprite } from '../types';
 
 	const { debug, key, ...baseSpriteProps }: Props = $props();
-	const context = getContextApp();
+	const context = getContextApp();AssetsLoader.svelte
 	const texture = $derived(
 		(context.stateApp.loadedAssets?.[key] || PIXI.Texture.EMPTY) as LoadedSprite,
 	);
