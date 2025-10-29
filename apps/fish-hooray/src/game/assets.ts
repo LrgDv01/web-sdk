@@ -1,4 +1,10 @@
 export default {
+		// NEW: Added for "loader" error - simple sprite replacement (create loader.png if missing)
+	loader: {
+		type: 'sprite',
+		src: new URL('../../assets/sprites/loadingScreen/loader.png', import.meta.url).href,  // Adjust path to where you save the PNG
+		preload: true  // Preload since it's for loading screen
+	},
 	pressToContinueText: {
 		type: 'sprites',
 		src: new URL('../../assets/sprites/pressToContinueText/MM_pressanywhere.json', import.meta.url).href,
@@ -32,7 +38,7 @@ export default {
 		preload: true,
 	},
 	// Your replacement for reels_frame (kept as-is)
-	'reels_frame': {
+	reels_frame: {
 		type: 'sprite',  // Use 'sprite' for single PNG—processed as PIXI.Texture
 		src: new URL('../../assets/sprites/reelsFrame/reels_frame.png', import.meta.url).href,
 		preload: true
@@ -62,12 +68,6 @@ export default {
 		type: 'audio',
 		src: new URL('../../assets/audio/sounds.json', import.meta.url).href,
 		preload: true,
-	},
-	// NEW: Added for "loader" error - simple sprite replacement (create loader.png if missing)
-	loader: {
-		type: 'sprite',
-		src: new URL('../../assets/sprites/loadingScreen/S.png', import.meta.url).href,  // Adjust path to where you save the PNG
-		preload: true  // Preload since it's for loading screen
 	},
 	// NEW: Added for "S" error - assuming it's a symbol like starfish (create S.png if missing)
 	// S: {

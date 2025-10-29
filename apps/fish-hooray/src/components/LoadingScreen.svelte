@@ -79,14 +79,14 @@
 <FadeContainer show={loadingType === 'start' && context.stateApp.loaded}>
 	<PressToContinue onpress={() => {
 		loadingType = 'transition';
-
-		// sound.players.loop.play({ name: 'jng_intro_fs' }); // Play a sound on press (replace 'start_game' with your actual sound key from sounds.json)
+		sound.players.once.play({ name: 'jng_intro_fs' }); // Play a sound on press (replace 'start_game' with your actual sound key from sounds.json)
+		sound.players.music.fade({ name: 'bgm_winlevel_superwin', from: 0, to: 1, duration: 2000 });
 	}} />
 </FadeContainer>
 
 <FadeContainer show={loadingType === 'transition'}>
 	<TransitionAnimation oncomplete={() => {
 		props.onloaded();
-		// sound.players.loop.play({ name: 'jng_intro_fs' });  // Optional: Play sound on transition end (adjust key)
+		sound.players.once.play({ name: 'jng_intro_fs' });  // Optional: Play sound on transition end (adjust key)
 	}} />
 </FadeContainer>
