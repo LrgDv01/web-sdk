@@ -28,6 +28,32 @@
 	let animationState = $state<AnimationState>('intro');
 </script>
 
+
+<!-- ADDED -->
+<!-- <script>
+  import { Container, Sprite } from '@pixi-svelte/core'; // Or your imports
+  import { onMount } from 'svelte';
+  let bubbles = [];
+  onMount(() => {
+    for (let i = 0; i < 10; i++) {
+      bubbles.push({ x: Math.random() * width, y: height, speed: Math.random() * 5 + 1 });
+    }
+    Ticker.shared.add(animateBubbles);
+  });
+  function animateBubbles() {
+    bubbles = bubbles.map(b => ({ ...b, y: b.y - b.speed }));
+    // Remove off-screen, etc.
+  }
+</script>
+
+
+ <Container>
+  {#each bubbles as bubble}
+    <Sprite texture="bubble" position={{x: bubble.x, y: bubble.y}} scale={0.5} />
+  {/each}
+</Container> -->
+ <!-- ADDED END -->
+
 <SpineProvider width={context.stateGameDerived.boardLayout().width} key="bigwin">
 	<SpineTrack
 		trackIndex={0}

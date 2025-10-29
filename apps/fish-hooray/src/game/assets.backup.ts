@@ -1,4 +1,5 @@
 export default {
+
 	pressToContinueText: {
 		type: 'sprites',
 		src: new URL('../../assets/sprites/pressToContinueText/MM_pressanywhere.json', import.meta.url).href,
@@ -20,7 +21,8 @@ export default {
 		type: 'font',
 		src: new URL('../../assets/fonts/purpleFont/mm_purple.xml', import.meta.url).href,
 	},
-	// Static sprite fallbacks for backgrounds (kept as-is)
+	
+	// Static sprite fallbacks for projects that prefer PNG/WebP backgrounds instead of Spine
 	backgroundImage: {
 		type: 'sprite',
 		src: new URL('../../assets/sprites/backgroundImage/background_image.webp', import.meta.url).href,
@@ -31,12 +33,14 @@ export default {
 		src: new URL('../../assets/sprites/backgroundImage/background_image.png', import.meta.url).href,
 		preload: true,
 	},
-	// Your replacement for reels_frame (kept as-is)
+
+	// Replace your 'reels_frame' with this
 	'reels_frame': {
-		type: 'sprite',  // Use 'sprite' for single PNG—processed as PIXI.Texture
-		src: new URL('../../assets/sprites/reelsFrame/reels_frame.png', import.meta.url).href,
-		preload: true
+		type: 'sprite',  // Use 'image' for single PNG—processed as PIXI.Texture (avoids "no process method" error)
+		src: new URL('../../assets/sprites/reelsFrame/reels_frame.png', import.meta.url).href,  // Absolute URL for Vite/Pixi loading
+		preload: true  // Load early
 	},
+
 	progressBar: {
 		type: 'sprites',
 		src: new URL('../../assets/sprites/progressBar/progressBar.json', import.meta.url).href,
@@ -50,6 +54,7 @@ export default {
 		type: 'sprites',
 		src: new URL('../../assets/sprites/winSmall/MM_Localisation_winsmall.json', import.meta.url).href,
 	},
+	
 	symbolsStatic: {
 		type: 'sprites',
 		src: new URL('../../assets/sprites/symbolsStatic/symbolsStatic.json', import.meta.url).href,
@@ -63,17 +68,4 @@ export default {
 		src: new URL('../../assets/audio/sounds.json', import.meta.url).href,
 		preload: true,
 	},
-	// NEW: Added for "loader" error - simple sprite replacement (create loader.png if missing)
-	loader: {
-		type: 'sprite',
-		src: new URL('../../assets/sprites/loadingScreen/S.png', import.meta.url).href,  // Adjust path to where you save the PNG
-		preload: true  // Preload since it's for loading screen
-	},
-	// NEW: Added for "S" error - assuming it's a symbol like starfish (create S.png if missing)
-	// S: {
-	// 	type: 'sprite',
-	// 	src: new URL('../../assets/sprites/symbols/S.png', import.meta.url).href,  // Adjust path; or use a frame from symbolsStatic if available
-	// 	preload: true  // Preload for quick symbol rendering
-	// },
-	// TIP: If "S" is part of symbolsStatic.json (as a frame), you could remove this and update your symbol code to use sheet frames instead, e.g., texture = PIXI.Texture.from('symbolsStatic/S')
 } as const;

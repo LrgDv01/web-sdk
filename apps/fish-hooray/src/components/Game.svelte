@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { Graphics, Text } from 'pixi-svelte';
-  import { onMount, tick } from 'svelte';  // For lifecycle and async updates
+  // import { Graphics, Text } from 'pixi-svelte';
+  import { onMount } from 'svelte';  // For lifecycle and async updates
 
   import { EnablePixiExtension } from 'components-pixi';
   import { EnableHotkey } from 'components-shared';
   import { MainContainer } from 'components-layout';
-  import { App, REM } from 'pixi-svelte';
+  import { App, Text, REM } from 'pixi-svelte';
   import { stateModal } from 'state-shared';
 
   import { UI, UiGameName } from 'components-ui-pixi';
@@ -30,15 +30,23 @@
 
   const context = getContext();
 
-  onMount(() => {
-    context.stateLayout.showLoadingScreen = true;
+  // onMount(() => {
+  //   context.stateLayout.showLoadingScreen = true;
 
-    context.eventEmitter.subscribeOnMount({
-      buyBonusConfirm: () => {
-        stateModal.modal = { name: 'buyBonusConfirm' };
-      },
-    });
-  });
+  //   context.eventEmitter.subscribeOnMount({
+  //     buyBonusConfirm: () => {
+  //       stateModal.modal = { name: 'buyBonusConfirm' };
+  //     },
+  //   });
+  // });
+  onMount(() => (context.stateLayout.showLoadingScreen = true));
+
+	context.eventEmitter.subscribeOnMount({
+		buyBonusConfirm: () => {
+			stateModal.modal = { name: 'buyBonusConfirm' };
+		},
+	});
+
 </script>
 
 <App>
@@ -46,9 +54,8 @@
   <EnableHotkey />
   <EnableGameActor />
   <EnablePixiExtension />
-
   <Background useStaticBackground={true} />
-
+  
   {#if context.stateLayout.showLoadingScreen}
     <LoadingScreen onloaded={() => (context.stateLayout.showLoadingScreen = false)} />
   {:else}

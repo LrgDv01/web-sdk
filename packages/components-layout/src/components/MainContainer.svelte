@@ -58,21 +58,21 @@
 		{#if debug}
 			<Text
 				text={`
-layoutType: ${context.stateLayoutDerived.layoutType()}
+				layoutType: ${context.stateLayoutDerived.layoutType()}
 
-type: ${standard ? 'standard' : 'game'}
+				type: ${standard ? 'standard' : 'game'}
 
-scale: ${mainLayout.scale}
+				scale: ${mainLayout.scale}
 
-mainSizes: {
-		width: ${mainLayout.width},
-		height: ${mainLayout.height}
-}
+				mainSizes: {
+						width: ${mainLayout.width},
+						height: ${mainLayout.height}
+				}
 
-canvasSizes: {
-		width: ${context.stateLayoutDerived.canvasSizes().width},
-		height: ${context.stateLayoutDerived.canvasSizes().height}
-}`}
+				canvasSizes: {
+						width: ${context.stateLayoutDerived.canvasSizes().width},
+						height: ${context.stateLayoutDerived.canvasSizes().height}
+				}`}
 				style={{ fill: 0xffffff }}
 			/>
 		{/if}

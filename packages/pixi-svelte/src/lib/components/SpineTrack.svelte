@@ -21,23 +21,23 @@
 
 	let track = $state(spine.state.tracks[props.trackIndex]);
 
-	$effect(() => {
-		if (props.trackIndex !== track?.trackIndex || props.animationName !== track?.animation?.name) {
-			if (track) spine.state.setEmptyAnimation(track.trackIndex, 0);
-			try {
-				track = spine.state.setAnimation(props.trackIndex, props.animationName, props.loop);
-			} catch (error) {
-				console.error(error);
-				const animations = spine?.state?.data?.skeletonData?.animations;
-				if (animations) {
-					console.log(
-						'Available animation names:',
-						animations.map((animation) => animation.name),
-					);
-				}
-			}
-		}
-	});
+	// $effect(() => {
+	// 	if (props.trackIndex !== track?.trackIndex || props.animationName !== track?.animation?.name) {
+	// 		if (track) spine.state.setEmptyAnimation(track.trackIndex, 0);
+	// 		try {
+	// 			track = spine.state.setAnimation(props.trackIndex, props.animationName, props.loop);
+	// 		} catch (error) {
+	// 			console.error(error);
+	// 			const animations = spine?.state?.data?.skeletonData?.animations;
+	// 			if (animations) {
+	// 				console.log(
+	// 					'Available animation names:',
+	// 					animations.map((animation) => animation.name),
+	// 				);
+	// 			}
+	// 		}
+	// 	}
+	// });
 
 	propsSyncEffect({ props, target: () => track, ignore: ['trackIndex', 'animationName'] });
 

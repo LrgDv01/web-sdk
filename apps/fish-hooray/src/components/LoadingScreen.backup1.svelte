@@ -1,7 +1,4 @@
 <script lang="ts">
-
-	import { onMount } from 'svelte';
-
 	import { Container, Sprite } from 'pixi-svelte';  // Kept as-is
 	import { FadeContainer, LoadingProgress } from 'components-pixi';
 	import { MainContainer } from 'components-layout';
@@ -10,12 +7,13 @@
 	import TransitionAnimation from './TransitionAnimation.svelte';
 	import PressToContinue from './PressToContinue.svelte';
 
+	import { onMount } from 'svelte';
 	// Fixed import: Use modular Pixi for Ticker (fixes "cannot find module 'pixi.js'")
 	import { Ticker } from '@pixi/core';  // Run `npm install @pixi/core` if not installed
 	import type { Sprite as PixiSprite } from '@pixi/sprite';  // For typing
 
 	// For sound: Assume utils-sound exports playSound; adjust if your export is different
-	import { sound } from '../game/sound';  // Import from your package (check path in package.json)
+	import { createSound } from 'utils-sound';  // Import from your package (check path in package.json)
 
 	type Props = {
 		onloaded: () => void;
@@ -38,15 +36,12 @@
 
 	onMount(() => {
 		if (loaderSprite) {
-			sound.players.music.play({ name: 'bgm_winlevel_superwin' });
 			const ticker = Ticker.shared;
 			ticker.add(animateLoader);  // Add the defined function
 			return () => ticker.remove(animateLoader);  // Proper cleanup on unmount
 		}
 	});
 
-	console.log("LOADINGSCREEN TEST LOADED", context.stateApp.loaded);
-	console.log("LOADINGSCREEN TEST LOAD ASSETS", context.stateApp.loadedAssets);
 </script>
 
 <FadeContainer show={loadingType === 'start'}>
@@ -72,21 +67,19 @@
 			{/if}
 		</Container>
 	</MainContainer>
-	
 </FadeContainer>
 
 <!-- Press to continue with sound trigger -->
 <FadeContainer show={loadingType === 'start' && context.stateApp.loaded}>
 	<PressToContinue onpress={() => {
 		loadingType = 'transition';
-
-		// sound.players.loop.play({ name: 'jng_intro_fs' }); // Play a sound on press (replace 'start_game' with your actual sound key from sounds.json)
+		createSound('start_game');  // Play a sound on press (replace 'start_game' with your actual sound key from sounds.json)
 	}} />
 </FadeContainer>
 
 <FadeContainer show={loadingType === 'transition'}>
 	<TransitionAnimation oncomplete={() => {
 		props.onloaded();
-		// sound.players.loop.play({ name: 'jng_intro_fs' });  // Optional: Play sound on transition end (adjust key)
+		createSound('transition_complete');  // Optional: Play sound on transition end (adjust key)
 	}} />
 </FadeContainer>

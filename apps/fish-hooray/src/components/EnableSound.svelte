@@ -19,7 +19,6 @@
 			destroy();
 		};
 	});
-
 	sound.enableEffect();
 	sound.volumeEffect();
 </script>

@@ -17,6 +17,7 @@
 	import { waitForTimeout } from 'utils-shared/wait';
 	import { SECOND } from 'constants-shared/time';
 	import { stateBet } from 'state-shared';
+	import { stateGame, stateGameDerived } from '../game/stateGame.svelte';
 
 	import { getContext } from '../game/context';
 
@@ -51,14 +52,22 @@
 		if (stateBet.activeBetModeKey === 'SUPERSPIN') {
 			// check if SUPERSPIN, when resume bet and the bet is a super spin.
 			sound.players.music.play({ name: 'bgm_freespin' });
-		} else {
+		} 
+		// else if (
+		// stateGame.gameType ===
+		// ) {
+		// 	sound.players.music.play({ name: 'bgm_winlevel_superwin' });
+		// }
+		else {
 			sound.players.music.play({ name: 'bgm_main' });
 
 			//How to control volume per soundfile(use fade)
-			// sound.players.music.fade({ name: 'bgm_main', from: 0, to: 1, duration: 2000 });
-
+			// sound.players.music.fade({ name: 'bgm_main', from: 0, to: 1, duration: 2000 }); bgm_winlevel_superwin
+ 
 			//How to control rate per soundfile
 			// sound.players.music.rate({ rate: 2, name: 'bgm_main'}); // change play back rate(1: default, 0: slow, 1+ fasterm and higher pitch )
 		}
+
 	});
+
 </script>

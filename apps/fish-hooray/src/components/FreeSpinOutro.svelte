@@ -23,7 +23,7 @@
 
 	type AnimationName = 'intro' | 'idle';
 
-	const context = getContext();
+	const context = getContext();	
 
 	let show = $state(true);
 	let animationName = $state<AnimationName>('intro');
