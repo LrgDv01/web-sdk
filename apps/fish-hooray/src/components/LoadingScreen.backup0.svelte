@@ -1,8 +1,7 @@
 <script lang="ts">
-
 	import { onMount } from 'svelte';
 
-	import { Container, Sprite } from 'pixi-svelte';  // Kept as-is
+	import { Container, Sprite } from 'pixi-svelte';
 	import { FadeContainer, LoadingProgress } from 'components-pixi';
 	import { MainContainer } from 'components-layout';
 
@@ -10,12 +9,10 @@
 	import TransitionAnimation from './TransitionAnimation.svelte';
 	import PressToContinue from './PressToContinue.svelte';
 
-	// Fixed import: Use modular Pixi for Ticker (fixes "cannot find module 'pixi.js'")
-	import { Ticker } from '@pixi/core';  // Run `npm install @pixi/core` if not installed
-	import type { Sprite as PixiSprite } from '@pixi/sprite';  // For typing
-
-	// For sound: Assume utils-sound exports playSound; adjust if your export is different
-	import { sound } from '../game/sound';  // Import from your package (check path in package.json)
+	// import { Texture } from '@pixi/core';
+	import type { Sprite as PixiSprite } from '@pixi/sprite';
+	import { sound } from '../game/sound';
+	import { Ticker } from '@pixi/ticker';
 
 	type Props = {
 		onloaded: () => void;
@@ -25,28 +22,28 @@
 	const context = getContext();
 
 	let loadingType = $state<'start' | 'transition'>('start');
-
-	// Fixed typing: Explicitly type loaderSprite to avoid implicit 'any' errors
 	let loaderSprite: PixiSprite | null = null;
 
-	// Fixed animation: Define as separate function for proper add/remove
-	const animateLoader = () => {
-		if (loaderSprite) {  // Null check to prevent rotation error on null
-			loaderSprite.rotation += 0.02;  // Gentle rotate
+	const animateLoader = (delta) => {  // Use delta for frame-independent speed
+		if (loaderSprite) {
+			loaderSprite.rotation += 0.015 * delta;  // Rotate
+			loaderSprite.scale.set(1 + 0.05 * Math.sin(Date.now() / 500));  // Pulse scale (breath effect)
 		}
 	};
 
-	onMount(() => {
-		if (loaderSprite) {
-			sound.players.music.play({ name: 'bgm_winlevel_superwin' });
-			const ticker = Ticker.shared;
-			ticker.add(animateLoader);  // Add the defined function
-			return () => ticker.remove(animateLoader);  // Proper cleanup on unmount
-		}
+	// FIXED: $effect.pre runs BEFORE paint – immediate when bind sets
+	$effect.pre(() => {
+		if (!loaderSprite) return;
+
+		sound.players.music.play({ name: 'bgm_winlevel_superwin' });
+
+		const ticker = Ticker.shared;
+		ticker.add(animateLoader);
+
+		return () => ticker.remove(animateLoader);
 	});
 
-	console.log("LOADINGSCREEN TEST LOADED", context.stateApp.loaded);
-	console.log("LOADINGSCREEN TEST LOAD ASSETS", context.stateApp.loadedAssets);
+	console.log("LOADING SCREEN SVELTE PROGRESS BAR ", context.stateApp.loadedAssets.progressBar);
 </script>
 
 <FadeContainer show={loadingType === 'start'}>
@@ -55,12 +52,11 @@
 			x={context.stateLayoutDerived.mainLayout().width * 0.5}
 			y={context.stateLayoutDerived.mainLayout().height * 0.5}
 		>
-			<!-- Bind for animation access -->
 			<Sprite bind:this={loaderSprite} key="loader" x={0} y={0} anchor={{ x: 0.5, y: 0.5 }} scale={1} />
 			{#if !context.stateApp.loaded}
 				<LoadingProgress y={250} width={1967 * 0.2} height={346 * 0.2}>
 					{#snippet background(sizes)}
-						<Sprite key="progressBarBackground.png" {...sizes} />
+						<Sprite key="progressBarBackground.png" {...sizes} />  <!-- FIXED: Ensure exact key from json (log loadedAssets.progressBar to check) -->
 					{/snippet}
 					{#snippet progress(sizes)}
 						<Sprite key="progressBar.png" {...sizes} />
@@ -72,21 +68,17 @@
 			{/if}
 		</Container>
 	</MainContainer>
-	
 </FadeContainer>
 
-<!-- Press to continue with sound trigger -->
 <FadeContainer show={loadingType === 'start' && context.stateApp.loaded}>
 	<PressToContinue onpress={() => {
 		loadingType = 'transition';
-		sound.players.once.play({ name: 'jng_intro_fs' }); // Play a sound on press (replace 'start_game' with your actual sound key from sounds.json)
+		sound.players.once.play({ name: 'jng_intro_fs' });
 		sound.players.music.fade({ name: 'bgm_winlevel_superwin', from: 0, to: 1, duration: 2000 });
 	}} />
 </FadeContainer>
 
 <FadeContainer show={loadingType === 'transition'}>
-	<TransitionAnimation oncomplete={() => {
-		props.onloaded();
-		sound.players.once.play({ name: 'jng_intro_fs' });  // Optional: Play sound on transition end (adjust key)
-	}} />
+	<TransitionAnimation oncomplete={props.onloaded} />
 </FadeContainer>
+

@@ -36,6 +36,12 @@ importers:
       '@lingui/core':
         specifier: 5.2.0
         version: 5.2.0(@lingui/babel-plugin-lingui-macro@5.2.0(babel-plugin-macros@3.1.0)(typescript@5.9.3))(babel-plugin-macros@3.1.0)
+      '@pixi/sprite':
+        specifier: ^7.4.3
+        version: 7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))
+      '@pixi/ticker':
+        specifier: ^7.4.3
+        version: 7.4.3
       '@sveltejs/kit':
         specifier: 2.17.3
         version: 2.17.3(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.20.5)(vite@6.2.0(@types/node@24.9.2)(jiti@1.21.7)(sass-embedded@1.85.1)))(svelte@5.20.5)(vite@6.2.0(@types/node@24.9.2)(jiti@1.21.7)(sass-embedded@1.85.1))
@@ -719,7 +725,7 @@ importers:
         version: 2.5.8(eslint@9.21.0(jiti@1.21.7))(turbo@2.4.4)
       eslint-plugin-svelte:
         specifier: latest
-        version: 3.12.5(eslint@9.21.0(jiti@1.21.7))(svelte@5.20.5)
+        version: 3.13.0(eslint@9.21.0(jiti@1.21.7))(svelte@5.20.5)
 
   packages/pixi-svelte:
     dependencies:
@@ -1794,6 +1800,11 @@ packages:
   '@pixi/core@7.4.3':
     resolution: {integrity: sha512-5YDs11faWgVVTL8VZtLU05/Fl47vaP5Tnsbf+y/WRR0VSW3KhRRGTBU1J3Gdc2xEWbJhUK07KGP7eSZpvtPVgA==}
 
+  '@pixi/display@7.4.3':
+    resolution: {integrity: sha512-b5m2dAaoNAVdxz1oDaxl3XZ059NEOcNtGkxTOZ4EYCw/jcp9sZXkgSROHRzsGn4k+NugH7+9MP4Id2Z0kkdUhw==}
+    peerDependencies:
+      '@pixi/core': 7.4.3
+
   '@pixi/extensions@7.4.3':
     resolution: {integrity: sha512-FhoiYkHQEDYHUE7wXhqfsTRz6KxLXjuMbSiAwnLb9uG1vAgp6q6qd6HEsf4X30YaZbLFY8a4KY6hFZWjF+4Fdw==}
 
@@ -1805,6 +1816,12 @@ packages:
 
   '@pixi/settings@7.4.3':
     resolution: {integrity: sha512-SmGK8smc0PxRB9nr0UJioEtE9hl4gvj9OedCvZx3bxBwA3omA5BmP3CyhQfN8XJ29+o2OUL01r3zAPVol4l4lA==}
+
+  '@pixi/sprite@7.4.3':
+    resolution: {integrity: sha512-iNBrpOFF9nXDT6m2jcyYy6l/sRzklLDDck1eFHprHZwvNquY2nzRfh+RGBCecxhBcijiLJ3fsZN33fP0LDXkvw==}
+    peerDependencies:
+      '@pixi/core': 7.4.3
+      '@pixi/display': 7.4.3
 
   '@pixi/ticker@7.4.3':
     resolution: {integrity: sha512-tHsAD0iOUb6QSGGw+c8cyRBvxsq/NlfzIFBZLEHhWZ+Bx4a0MmXup6I/yJDGmyPCYE+ctCcAfY13wKAzdiVFgQ==}
@@ -2670,8 +2687,8 @@ packages:
       eslint: '>=8'
       storybook: ^10.0.1
 
-  eslint-plugin-svelte@3.12.5:
-    resolution: {integrity: sha512-4KRG84eAHQfYd9OjZ1K7sCHy0nox+9KwT+s5WCCku3jTim5RV4tVENob274nCwIaApXsYPKAUAZFBxKZ3Wyfjw==}
+  eslint-plugin-svelte@3.13.0:
+    resolution: {integrity: sha512-2ohCCQJJTNbIpQCSDSTWj+FN0OVfPmSO03lmSNT7ytqMaWF6kpT86LdzDqtm4sh7TVPl/OEWJ/d7R87bXP2Vjg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.1 || ^9.0.0
@@ -4532,6 +4549,10 @@ snapshots:
       '@pixi/ticker': 7.4.3
       '@pixi/utils': 7.4.3
 
+  '@pixi/display@7.4.3(@pixi/core@7.4.3)':
+    dependencies:
+      '@pixi/core': 7.4.3
+
   '@pixi/extensions@7.4.3': {}
 
   '@pixi/math@7.4.3': {}
@@ -4543,6 +4564,11 @@ snapshots:
       '@pixi/constants': 7.4.3
       '@types/css-font-loading-module': 0.0.12
       ismobilejs: 1.1.1
+
+  '@pixi/sprite@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))':
+    dependencies:
+      '@pixi/core': 7.4.3
+      '@pixi/display': 7.4.3(@pixi/core@7.4.3)
 
   '@pixi/ticker@7.4.3':
     dependencies:
@@ -5453,7 +5479,7 @@ snapshots:
       - supports-color
       - typescript
 
-  eslint-plugin-svelte@3.12.5(eslint@9.21.0(jiti@1.21.7))(svelte@5.20.5):
+  eslint-plugin-svelte@3.13.0(eslint@9.21.0(jiti@1.21.7))(svelte@5.20.5):
     dependencies:
       '@eslint-community/eslint-utils': 4.9.0(eslint@9.21.0(jiti@1.21.7))
       '@jridgewell/sourcemap-codec': 1.5.5

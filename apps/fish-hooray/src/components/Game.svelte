@@ -41,11 +41,17 @@
   // });
   onMount(() => (context.stateLayout.showLoadingScreen = true));
 
+  $effect(() => {  // FIXED: Reactive to showLoadingScreen changes
+		console.log("Game.svelte: showLoadingScreen", context.stateLayout.showLoadingScreen);  // Debug reveal
+	});
+
 	context.eventEmitter.subscribeOnMount({
 		buyBonusConfirm: () => {
 			stateModal.modal = { name: 'buyBonusConfirm' };
 		},
 	});
+  console.log("GAME SVELTE SHOW LOADING SCREEN", context.stateLayout.showLoadingScreen);
+	console.log("GAME SVELTE PROGRESS BAR ", context.stateApp.loadedAssets.progressBar);
 
 </script>
 

@@ -1,3 +1,4 @@
+
 <script lang="ts">
 	import { onMount } from 'svelte';  // Still needed if other mounts, but $effect handles anim
 
@@ -9,7 +10,7 @@
 	import TransitionAnimation from './TransitionAnimation.svelte';
 	import PressToContinue from './PressToContinue.svelte';
 
-	import { Ticker } from '@pixi/core';
+	import { Ticker } from '@pixi/ticker';
 	import type { Sprite as PixiSprite } from '@pixi/sprite';
 	import { sound } from '../game/sound';
 
