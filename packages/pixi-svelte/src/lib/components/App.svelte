@@ -21,5 +21,6 @@
 		<AssetsLoader>
 			{@render props.children()}
 		</AssetsLoader>
+		
 	</InitialiseParent>
 </InitialiseApplication>
