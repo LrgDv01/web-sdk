@@ -7,6 +7,8 @@
 		debug?: boolean;
 		key: string;
 	};
+	// expose the PIXI instance for bind:instance
+	export let instance: PIXI.Sprite | undefined = undefined;
 </script>
 
 <script lang="ts">
@@ -26,6 +28,10 @@
 	{console.log('loadedAssets', $state.snapshot(context.stateApp).loadedAssets)}
 {/if}
 
-<BaseSprite {...baseSpriteProps} {texture} />
-
+<!-- <BaseSprite {...baseSpriteProps} {texture} /> -->
+<BaseSprite
+		{...baseSpriteProps}
+		{texture}
+		bind:instance
+	/>
 
